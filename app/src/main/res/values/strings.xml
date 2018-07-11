@@ -1,4 +1,9 @@
 <resources>
+    <string name="cancel">Cancel</string>
     <string name="app_name">RoundPureColorWithText</string>
     <string name="action_settings">Settings</string>
+    <string name="dialog_tips_is_permission">Permission Required</string>
+    <string name="dialog_button_ok">OK</string>
+    <string name="dialog_button_cancel">@string/cancel</string>
+    <string name="is_permission_rationale_write_storage">Storage write permission is required to save the image.</string>
 </resources>
