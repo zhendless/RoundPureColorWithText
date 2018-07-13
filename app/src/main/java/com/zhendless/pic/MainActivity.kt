@@ -27,6 +27,8 @@ import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
+    private val mColorList = arrayListOf<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -61,7 +63,7 @@ class MainActivity : AppCompatActivity() {
             paint.textSize = TEXT_SIZE
             paint.color = Color.WHITE
             paint.flags = 1
-            paint.style = Paint.Style.FILL
+            paint.style = Paint.Style.FILL_AND_STROKE
             val fontMetrics = paint.fontMetrics
             val fontHeight = fontMetrics.bottom - fontMetrics.top
             val textBaseY = PICTURE_HEIGHT - (PICTURE_HEIGHT - fontHeight) / 2 - fontMetrics.bottom
@@ -94,10 +96,12 @@ class MainActivity : AppCompatActivity() {
     private inner class DrawPicThread : Thread() {
         override fun run() {
             super.run()
-            var letter = 'A'
-            while (letter <= 'Z') {
-                generatePicture(letter.toString(), "#FF510D")
-                letter++
+            for (colorStr in mColorList) {
+                var letter = 'A'
+                while (letter <= 'Z') {
+                    generatePicture(letter.toString(), colorStr)
+                    letter++
+                }
             }
         }
     }
@@ -147,12 +151,70 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onWriteExternalStorageGranted() {
+        addColorIntoList()
         DrawPicThread().start()
     }
 
+    private fun addColorIntoList() {
+        mColorList.clear()
+        mColorList.add(COLOR_HEX_RED)
+        mColorList.add(COLOR_HEX_PINK)
+        mColorList.add(COLOR_HEX_PURPLE)
+
+        mColorList.add(COLOR_HEX_DEEP_PURPLE)
+        mColorList.add(COLOR_HEX_INDIGO)
+        mColorList.add(COLOR_HEX_BLUE)
+
+        mColorList.add(COLOR_HEX_LIGHT_BLUE)
+        mColorList.add(COLOR_HEX_CYAN)
+        mColorList.add(COLOR_HEX_TEAL)
+
+        mColorList.add(COLOR_HEX_GREEN)
+        mColorList.add(COLOR_HEX_LIGHT_GREEN)
+        mColorList.add(COLOR_HEX_LIME)
+
+        mColorList.add(COLOR_HEX_YELLOW)
+        mColorList.add(COLOR_HEX_AMBER)
+        mColorList.add(COLOR_HEX_ORANGE)
+
+        mColorList.add(COLOR_HEX_DEEP_ORANGE)
+        mColorList.add(COLOR_HEX_BROWN)
+        mColorList.add(COLOR_HEX_GREY)
+
+        mColorList.add(COLOR_HEX_BLUE_GREY)
+        mColorList.add(COLOR_HEX_BLACK)
+    }
+
     companion object {
-        private const val PICTURE_HEIGHT = 200
-        private const val TEXT_SIZE = 80f
+        private const val PICTURE_HEIGHT = 300
+        private const val TEXT_SIZE = 180f
         private const val PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 998
+        private const val COLOR_HEX_RED = "#F44336"
+        private const val COLOR_HEX_PINK = "#E91E63"
+        private const val COLOR_HEX_PURPLE = "#9C27B0"
+
+        private const val COLOR_HEX_DEEP_PURPLE = "#673AB7"
+        private const val COLOR_HEX_INDIGO = "#3F51B5"
+        private const val COLOR_HEX_BLUE = "#2196F3"
+
+        private const val COLOR_HEX_LIGHT_BLUE = "#03A9F4"
+        private const val COLOR_HEX_CYAN = "#00BCD4"
+        private const val COLOR_HEX_TEAL = "#009688"
+
+        private const val COLOR_HEX_GREEN = "#4CAF50"
+        private const val COLOR_HEX_LIGHT_GREEN = "#8BC34A"
+        private const val COLOR_HEX_LIME = "#CDDC39"
+
+        private const val COLOR_HEX_YELLOW = "#FFEB3B"
+        private const val COLOR_HEX_AMBER = "#FFC107"
+        private const val COLOR_HEX_ORANGE = "#FF9800"
+
+        private const val COLOR_HEX_DEEP_ORANGE = "#FF5722"
+        private const val COLOR_HEX_BROWN = "#795548"
+        private const val COLOR_HEX_GREY = "#9E9E9E"
+
+        private const val COLOR_HEX_BLUE_GREY = "#607D8B"
+        private const val COLOR_HEX_BLACK = "#000000"
+
     }
 }
